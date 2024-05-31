@@ -14,8 +14,9 @@ def get_url():
     server = os.getenv("POSTGRES_SERVER")
     port = os.getenv("POSTGRES_PORT")
     db = os.getenv("POSTGRES_DB")
-    print('URL:', f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}")
-    return f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}"
+    url = f"postgresql+asyncpg://{user}:{password}@{db}:{port}/postgres"
+    print('URL:', url)
+    return url
 
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
