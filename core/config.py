@@ -2,6 +2,8 @@ import os
 from pydantic_settings import BaseSettings
 from pydantic import validator
 from typing import List
+from dotenv import load_dotenv
+load_dotenv()
 
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
@@ -12,6 +14,7 @@ def get_url():
     server = os.getenv("POSTGRES_SERVER")
     port = os.getenv("POSTGRES_PORT")
     db = os.getenv("POSTGRES_DB")
+    print('URL:', f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}")
     return f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}"
 
 class Settings(BaseSettings):

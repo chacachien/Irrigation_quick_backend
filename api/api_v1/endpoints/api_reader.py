@@ -51,7 +51,7 @@ async def get_reader_blogs(reader_id: Annotated[int, Path(title='The reader id')
 
 # register
 @router.post("/register")
-async def create_reader(reader_data: ReaderCreate,user_service: UserService = Depends(), session: AsyncSession = Depends(get_session)):
+async def create_reader(reader_data: ReaderCreate, user_service: UserService = Depends(), session: AsyncSession = Depends(get_session)):
     #reader = Reader(**reader_data.model_dump())
     reader_new = await user_service.register(reader_data, session)
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=f"Successful!, User: {reader_new}")

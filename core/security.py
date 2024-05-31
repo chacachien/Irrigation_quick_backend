@@ -23,7 +23,7 @@ class AuthHandler:
         self.ALGORITHM = settings.ALGORITHM
         self.bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
         self.oauth2_bearer = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/token")
-
+        
     def encode_token(self, user_id: int, username: str) -> str:
         expire = datetime.now() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         to_encode = {
@@ -39,6 +39,7 @@ class AuthHandler:
             payload = jwt.decode(token, self.SECRET_KEY, algorithms = self.ALGORITHM)
             username: str= payload.get('sub')
             userid: int = payload.get('id')
+            
             return {'username': username, "userid": userid}
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Token expired")
@@ -48,9 +49,9 @@ class AuthHandler:
     def auth_wrapper(self, auth: HTTPAuthorizationCredentials = Security(HTTPBearer())):
         return self.decode_token(auth.credentials)
         
-    
     def verify_password(self, plain_password, hashed_password):
         return self.bcrypt_context.verify(plain_password, hashed_password)
+    
     def get_password_hash(self,password):
         return self.bcrypt_context.hash(password)
     
@@ -60,5 +61,7 @@ class AuthHandler:
         if user_info is None:
             raise HTTPException(status_code=401, detail="Invalid token")
         return user_info
+    
+
 
 

@@ -89,7 +89,6 @@ async def update_blog(
     blog_id: int,
     blog_data: BlogUpdate,
     session: AsyncSession = Depends(get_session),
-   
 ):
     try:
         # Retrieve the blog to update

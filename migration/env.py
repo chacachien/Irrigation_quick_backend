@@ -11,6 +11,8 @@ from sqlmodel import SQLModel
 from models.model_reader import Reader
 from models.model_blog import Blog 
 from models.model_reader_blog import ReaderBlog
+from models.model_farm import Farm
+from models.model_farmer import Farmer
 from core.config import get_url
 
 
