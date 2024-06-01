@@ -14,7 +14,8 @@ def get_url():
     server = os.getenv("POSTGRES_SERVER")
     port = os.getenv("POSTGRES_PORT")
     db = os.getenv("POSTGRES_DB")
-    url = f"postgresql+asyncpg://{user}:{password}@{db}:{port}/postgres"
+    #url = f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}"
+    url = "postgresql+asyncpg://moodleuser:2iqA1L98NoGmWvggo1ucAqhdl6BqTrB0@dpg-cobpft0cmk4c73ad87mg-a.singapore-postgres.render.com/moodle_lb30"
     print('URL:', url)
     return url
 
